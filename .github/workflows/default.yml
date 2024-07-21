@@ -1,8 +1,12 @@
 name: Build and Deployment
 run-name: ${{ github.actor }} running on ${{ github.ref_name }} branch
-on: push
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 jobs:
-  build:
+  java:
     uses: nikhileshtippana/devops/.github/workflows/java.yml@main
     with:
       java-version: '8'
