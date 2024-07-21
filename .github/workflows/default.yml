@@ -1,0 +1,9 @@
+name: Build and Deployment
+run-name: ${{ github.actor }} running on ${{ github.ref_name }} branch
+on: push
+jobs:
+  build:
+    uses: nikhileshtippana/devops/.github/workflows/main.yml@main
+    with:
+      package-manager: 'maven'
+      java-version: '8'
