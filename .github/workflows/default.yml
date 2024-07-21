@@ -3,7 +3,6 @@ run-name: ${{ github.actor }} running on ${{ github.ref_name }} branch
 on: push
 jobs:
   build:
-    uses: nikhileshtippana/devops/.github/workflows/main.yml@main
+    uses: nikhileshtippana/devops/.github/workflows/java.yml@main
     with:
-      package-manager: 'maven'
       java-version: '8'
