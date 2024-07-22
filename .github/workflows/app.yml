@@ -35,7 +35,7 @@ jobs:
       - name: Run tests
         run: mvn --batch-mode --update-snapshots verify
 
-      - uses: .github/actions/greet
+      - uses: ./.github/actions/greet
         with:
           who-to-greet: Nikhilesh
 
