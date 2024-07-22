@@ -6,7 +6,7 @@ on:
     branches: [ main ]
     paths:
       - 'src/**'
-      - '.github/workflows/app.yaml'
+      - '.github/**'
   workflow_dispatch:
 
 jobs:
@@ -35,7 +35,7 @@ jobs:
       - name: Run tests
         run: mvn --batch-mode --update-snapshots verify
 
-      - uses: ./.github/actions/greet.yml@main
+      - uses: ./.github/actions/action-greet.yml@main
         with:
           who-to-greet: Nikhilesh
 
