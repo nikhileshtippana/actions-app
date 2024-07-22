@@ -36,6 +36,8 @@ jobs:
         run: mvn --batch-mode --update-snapshots verify
 
       - uses: ./.github/actions/greet.yml@main
+        with:
+          who-to-greet: Nikhilesh
 
   docker-build:
     if: ${{ github.ref == 'refs/heads/main' }}
