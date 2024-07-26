@@ -5,15 +5,23 @@ on:
   create: {}
   delete: {}
   push:
-    branches: [ main ]
+    branches:
+      - 'main'
+      - 'dev/**'
     paths:
       - 'src/**'
       - '.github/workflows/crud.yml'
 
 jobs:
-  crud:
+  basic:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "basic - github.ref > ${{ github.ref }}, github.event.ref > ${{ github.event.ref }}"
+
+  if:
     if: ${{ contains(github.ref, 'refs/heads/dev/') }}
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "create - github.ref > ${{ github.ref }}, github.event.ref > ${{ github.event.ref }}"
+      - run: echo "if - github.ref > ${{ github.ref }}, github.event.ref > ${{ github.event.ref }}"
