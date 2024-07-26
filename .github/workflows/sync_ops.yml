@@ -18,11 +18,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Sync ${{ github.ref }}"
+      - name: Set up
+        run: |
+          if [[ "${{ vars.SYNC_MAIN_PATH }}" == "refs/heads/main" ]]; then
+            echo "dir_path=${{ vars.SYNC_MAIN_PATH }}" >> "$GITHUB_ENV"
+          else
+            DIR_PATH=${{ vars.SYNC_DEV_PATH_PREFIX }}-$(echo "${{ github.ref }}" | sed 's/refs\/heads\/dev\///' | sed 's/\//_/')
+            echo "dir_path=$DIR_PATH" >> "$GITHUB_ENV"
+          fi
+
+      - name: Sync branch to a path on server
+        run: echo "Sync to ${{ vars.SYNC_SERVER_NAME }} @ ${{ dir_path }}"
 
   cleanup:
     if: ${{ github.event_name == 'delete' && startsWith(github.event.ref, 'dev/') }}
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Cleanup ${{ github.event.ref }}"
+      - name: Cleanup branch related path on server
+        run: echo "Cleanup ${{ github.event.ref }}"
