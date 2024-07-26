@@ -12,6 +12,9 @@ on:
       - 'src/**'
       - '.github/workflows/sync_ops.yml'
 
+env:
+  sync_server: nik@${{ vars.SYNC_SERVER_NAME }}
+
 jobs:
   sync:
     if: ${{ contains(fromJSON('["create", "push"]'), github.event_name) && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/dev/') ) }}
@@ -28,7 +31,7 @@ jobs:
           fi
 
       - name: Sync branch to a path on server
-        run: echo "Sync to ${{ vars.SYNC_SERVER_NAME }} @ $dir_path"
+        run: echo "Sync to ${{ env.sync_server }} @ $dir_path"
 
   cleanup:
     if: ${{ github.event_name == 'delete' && startsWith(github.event.ref, 'dev/') }}
