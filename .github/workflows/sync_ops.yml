@@ -28,7 +28,7 @@ jobs:
           fi
 
       - name: Sync branch to a path on server
-        run: echo "Sync to ${{ vars.SYNC_SERVER_NAME }} @ ${{ dir_path }}"
+        run: echo "Sync to ${{ vars.SYNC_SERVER_NAME }} @ $dir_path"
 
   cleanup:
     if: ${{ github.event_name == 'delete' && startsWith(github.event.ref, 'dev/') }}
