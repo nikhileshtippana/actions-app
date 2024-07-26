@@ -1,0 +1,36 @@
+name: Sync Ops
+run-name: ${{ github.event.ref }} on ${{ github.event_name }}
+
+on:
+  create: {}
+  delete: {}
+  push:
+    branches:
+      - 'main'
+      - 'dev/**'
+    paths:
+      - 'src/**'
+      - '.github/workflows/sync_ops.yml'
+
+jobs:
+  print_context:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          echo $EVENT_CONTEXT
+
+  sync:
+    if: ${{ contains(fromJSON('["create", "push"]'), github.event_name) && startsWith(github.ref, 'refs/heads/dev/') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Sync ${{ github.ref }}"
+
+  cleanup:
+    if: ${{ github.event_name == "delete" && startsWith(github.event.ref, 'dev/') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Cleanup ${{ github.event.ref }}"
