@@ -1,0 +1,20 @@
+name: CRUD operations
+run-name: running branch - ${{ github.event.ref }}
+
+on:
+  create: {}
+  delete: {}
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - '.github/workflows/crud.yml'
+  workflow_dispatch:
+
+jobs:
+  create:
+    if: ${{ contains(github.ref, 'refs/heads/dev/') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "create - github.ref > ${{ github.ref }}, github.event.ref > ${{ github.event.ref }}"
