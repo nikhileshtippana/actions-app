@@ -1,5 +1,5 @@
 name: CRUD operations
-run-name: running branch - ${{ github.event.ref }}
+run-name: running crud on branch - ${{ github.event.ref }}
 
 on:
   create: {}
@@ -9,10 +9,9 @@ on:
     paths:
       - 'src/**'
       - '.github/workflows/crud.yml'
-  workflow_dispatch:
 
 jobs:
-  create:
+  crud:
     if: ${{ contains(github.ref, 'refs/heads/dev/') }}
     runs-on: ubuntu-latest
 
