@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Set up
         run: |
-          if [[ "${{ vars.SYNC_MAIN_PATH }}" == "refs/heads/main" ]]; then
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "dir_path=${{ vars.SYNC_MAIN_PATH }}" >> "$GITHUB_ENV"
           else
             DIR_PATH=${{ vars.SYNC_DEV_PATH_PREFIX }}-$(echo "${{ github.ref }}" | sed 's/refs\/heads\/dev\///' | sed 's/\//_/')
