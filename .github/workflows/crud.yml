@@ -20,7 +20,7 @@ jobs:
       - run: echo "basic - github.ref > ${{ github.ref }}, github.event.ref > ${{ github.event.ref }}"
 
   if:
-    if: ${{ contains(github.ref, 'refs/heads/dev/') }}
+    if: ${{ contains(github.ref, 'dev/') }}
     runs-on: ubuntu-latest
 
     steps:
