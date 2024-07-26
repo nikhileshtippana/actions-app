@@ -38,5 +38,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up
+        run: |
+          DIR_PATH=${{ vars.SYNC_DEV_PATH_PREFIX }}-$(echo "${{ github.ref }}" | sed 's/refs\/heads\/dev\///' | sed 's/\//_/')
+          echo "dir_path=$DIR_PATH" >> "$GITHUB_ENV"
+
       - name: Cleanup branch related path on server
-        run: echo "Cleanup ${{ github.event.ref }}"
+        run: echo "Cleanup ${{ env.sync_server }} @ $dir_path"
