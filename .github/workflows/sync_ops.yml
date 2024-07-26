@@ -1,5 +1,5 @@
 name: Sync Ops
-run-name: ${{ github.event.ref }} on ${{ github.event_name }}
+run-name: ${{ github.event.ref }} branch on ${{ github.event_name }}
 
 on:
   create: {}
@@ -13,16 +13,8 @@ on:
       - '.github/workflows/sync_ops.yml'
 
 jobs:
-  print_context:
-    runs-on: ubuntu-latest
-    steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        run: |
-          echo $EVENT_CONTEXT
-
   sync:
-    if: ${{ contains(fromJSON('["create", "push"]'), github.event_name) && startsWith(github.ref, 'refs/heads/dev/') }}
+    if: ${{ contains(fromJSON('["create", "push"]'), github.event_name) && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/dev/') ) }}
     runs-on: ubuntu-latest
 
     steps:
