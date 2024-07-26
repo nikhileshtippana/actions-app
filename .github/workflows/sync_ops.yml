@@ -40,7 +40,7 @@ jobs:
     steps:
       - name: Set up
         run: |
-          DIR_PATH=${{ vars.SYNC_DEV_PATH_PREFIX }}-$(echo "${{ github.event.ref }}" | sed 's/refs\/heads\/dev\///' | sed 's/\//_/g')
+          DIR_PATH=${{ vars.SYNC_DEV_PATH_PREFIX }}-$(echo "${{ github.event.ref }}" | sed 's/dev\///' | sed 's/\//_/g')
           echo "dir_path=$DIR_PATH" >> "$GITHUB_ENV"
 
       - name: Cleanup branch related path on server
