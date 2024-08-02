@@ -15,6 +15,7 @@
     <description>bmi</description>
     <properties>
         <java.version>11</java.version>
+        <some.prop1>value1</some.prop1>
     </properties>
     <dependencies>
         <dependency>
