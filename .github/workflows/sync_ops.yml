@@ -24,7 +24,7 @@ jobs:
       cancel-in-progress: true
 
     steps:
-      - name: Set up1
+      - name: Set up
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "dir_path=${{ vars.SYNC_MAIN_PATH }}" >> "$GITHUB_ENV"
