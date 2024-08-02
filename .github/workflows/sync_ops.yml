@@ -19,6 +19,9 @@ jobs:
   sync:
     if: ${{ contains(fromJSON('["create", "push"]'), github.event_name) && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/dev/') ) }}
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - name: Set up
@@ -31,7 +34,7 @@ jobs:
           fi
 
       - name: Sync branch to a path on server
-        run: echo "Sync to ${{ env.sync_server }} @ $dir_path"
+        run: echo "Sync to ${{ env.sync_server }} @ ${{ env.dir_path }}"
 
   cleanup:
     if: ${{ github.event_name == 'delete' && startsWith(github.event.ref, 'dev/') }}
@@ -40,8 +43,11 @@ jobs:
     steps:
       - name: Set up
         run: |
-          DIR_PATH=${{ vars.SYNC_DEV_PATH_PREFIX }}-$(echo "${{ github.event.ref }}" | sed 's/dev\///' | sed 's/\//_/g')
+          DIR_PATH=${{ vars.SYNC_DEV_PATH_PREFIX }}-$(echo "${{ github.ref }}" | sed 's/dev\///' | sed 's/\//_/g')
           echo "dir_path=$DIR_PATH" >> "$GITHUB_ENV"
 
       - name: Cleanup branch related path on server
-        run: echo "Cleanup ${{ env.sync_server }} @ $dir_path"
+        run: |
+          if [[ "${{ env.dir_path }}" != "${{ vars.SYNC_DEV_PATH_PREFIX }}-main" ]]; then
+            echo "Cleanup ${{ env.sync_server }} @ ${{ env.dir_path }}"
+          fi
