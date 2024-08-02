@@ -49,6 +49,7 @@ jobs:
       - name: Cleanup branch related path on server
         run: |
           if [[ "${{ env.dir_path }}" == "${{ vars.SYNC_DEV_PATH_PREFIX }}-main" ]]; then
+            echo "Not allowed to remove main path"
             exit 1
           fi
           echo "Cleanup ${{ env.sync_server }} @ ${{ env.dir_path }}"
