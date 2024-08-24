@@ -1,5 +1,5 @@
 name: Code Quality
-run-name: ${{ github.ref }} to ${{ github.ref_name }} branch - testing
+run-name: ${{ github.ref_name }} from ${{ github.head_ref }} to ${{ github.base_ref }}
 
 on:
   pull_request:
