@@ -1,0 +1,19 @@
+name: Code Quality
+run-name: ${{ github.ref }} to ${{ github.ref_name }} branch
+
+on:
+  push:
+    branches:
+      - main
+      - releases/**
+    paths:
+      - 'src/**'
+      - '.github/**'
+
+jobs:
+  sonarqube:
+    name: SonarQube
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run tests
+        run: echo "Run tests"
