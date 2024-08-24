@@ -3,7 +3,9 @@ run-name: ${{ github.actor }} running on ${{ github.ref_name }} branch
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - releases/**
     paths:
       - 'src/**'
       - '.github/**'
