@@ -11,6 +11,7 @@ on:
     paths:
       - 'src/**'
       - '.github/workflows/sync_ops.yml'
+  workflow_dispatch:
 
 env:
   sync_server: nik@${{ vars.SYNC_SERVER_NAME }}
