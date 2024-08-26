@@ -17,7 +17,7 @@ RUN addgroup -g 1001 -S tecogroup
 
 RUN adduser -S teco -u 1001
 
-COPY --from=build /project/target/bmi-1.0.2.jar /app/bmi.jar
+COPY --from=build /project/target/bmi-1.0.3.jar /app/bmi.jar
 
 WORKDIR /app
 

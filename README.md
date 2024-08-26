@@ -48,7 +48,7 @@ mvn clean package
 
 Run the generated .jar file in the target folder
 ```shell
-java -jar target/bmi-1.0.2.jar
+java -jar target/bmi-1.0.3.jar
 ```
 
 ## Docker
