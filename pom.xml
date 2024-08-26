@@ -15,7 +15,6 @@
     <description>bmi</description>
     <properties>
         <java.version>11</java.version>
-        <some.prop1>value1</some.prop1>
     </properties>
     <dependencies>
         <dependency>
@@ -59,5 +58,13 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/nikhileshtippana/actions-app</url>
+        </repository>
+    </distributionManagement>
 
 </project>
