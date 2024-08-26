@@ -19,5 +19,11 @@ jobs:
     name: SonarQube
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Maven dependencies caching
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
       - name: Run tests
-        run: echo "Run tests"
+        run: mvn test
