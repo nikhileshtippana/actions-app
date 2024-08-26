@@ -10,9 +10,10 @@ on:
     branches:
       - main
       - releases/**
-    paths:
-      - 'src/**'
-      - '.github/**'
+    paths-ignore:
+      - 'README.md'
+      - 'package-lock.json'
+      - 'yarn.lock'
 
 jobs:
   sonarqube:
